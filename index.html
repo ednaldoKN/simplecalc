@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Calculadora de velocidade Hidro Roll</title>
+
+	<style type="text/css">
+		.container{
+			background: #0d2b45;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+			position: absolute;
+			top: 0px;
+			bottom: 0px;
+			left: 0px;
+			right: 0px;
+
+			color: white;
+			font-weight: bold;
+		}
+
+		label{
+			font-size: 20px;
+		}
+
+		input{
+			line-height: 40px;
+			font-size: 20px;
+			border-radius: 24px;
+			text-align: center;
+			margin-top: 20px;
+			margin-bottom: 20px;
+			font-weight: bold;
+			width: 100%;
+		}
+		button{
+			width: 100%;
+			line-height: 40px;
+			border-radius: 24px;
+			font-weight: bold;
+			font-size: 20px;
+			border: none;
+			margin: 10px;
+		}
+
+		button:hover{
+			border:  1px solid red;
+
+		}
+
+		p{
+			font-size: 20px;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div>
+			<label>Velocidade em m/s:</label><br>
+			<input type="text" id="velocidade" name="" value="40">
+			<hr>
+
+			<label>Distancia em metros do Hidro Roll:</label><br>
+			<input type="text" id="distancia-hidroroll" name="" value="350">
+
+			<hr>
+
+			<button type="button" onclick="calc()">
+				Calcular
+			</button>
+		</div>
+
+		<div>
+			<div id="result-velocidadeM/H">
+				<p>Velocidade m/h : <span id="vel-m/h"></span></p>
+				<hr>
+				<p>Tempo para enrolar: <span id="hidroroll-time"></span></p>
+			</div>
+		</div>
+	</div>
+
+
+	<script type="text/javascript">
+		 let velocidadePorMetro= document.getElementById('velocidade')
+		 let distanciaHidroRoll= document.getElementById('distancia-hidroroll')
+
+		 let resultVelPorMetro= document.getElementById('vel-m/h')
+		 let resultTempoParaEnrolar=document.getElementById('hidroroll-time')
+
+		 function calc(){
+		 	let resp1= 3600/velocidadePorMetro.value
+
+		 	let resp2= distanciaHidroRoll.value/resp1
+
+		 	let mask=resp2.toString().split('.')
+
+		 	let horas= Number(mask[0])
+		 	let horasCasasDecimais= mask[1].split('')
+
+		 	// console.log( min[0])
+		 	let minuttesMask=`0.${horasCasasDecimais[0]}${horasCasasDecimais[1]}`
+
+		 	
+		 	let min1 = parseFloat(minuttesMask)
+		 	let minutoCerto= parseInt(min1 *60)
+
+		 	
+		 	resultVelPorMetro.innerHTML=resp1
+
+		 	resultTempoParaEnrolar.innerHTML=`${horas}h : ${minutoCerto} min`
+
+		 }
+	</script>
+</body>
+</html>
